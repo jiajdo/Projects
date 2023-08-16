@@ -5,9 +5,13 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <p>This is my game</p>
-    </>
+    <div className='App'>
+      <nav>
+        <h1>Wordle</h1>
+      </nav>
+      <Board />
+      <Keyboard />
+    </div>
   )
 }
 
