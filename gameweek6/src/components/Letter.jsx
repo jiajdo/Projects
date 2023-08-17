@@ -8,7 +8,7 @@ function Letter({letterPosition, attemptVal}) {
     const { board } = useContext(AppContext)
     const letter = board[attemptVal][letterPosition]
   return (
-    <div className='letter'> </div>
+    <div className='letter'>{letter}</div>
   )
 }
 

@@ -7,7 +7,6 @@ const boardDefault = [
     ['', '', '', '', ''],
     ['', '', '', '', ''],
     ['', '', '', '', ''],
-
 ];
 
 export {boardDefault}
