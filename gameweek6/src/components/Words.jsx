@@ -1,5 +1,5 @@
 import React from 'react'
-
+//helper to set useState default to empty board
 const boardDefault = [
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -10,4 +10,4 @@ const boardDefault = [
 
 ];
 
-export { boardDefault } 
+export default boardDefault
