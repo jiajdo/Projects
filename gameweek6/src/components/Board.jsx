@@ -1,7 +1,6 @@
-import React from 'react'
-import boardDefault from './Words';
-import { useState } from 'react'
+import React, {useState} from 'react'
 import Letter from './Letter';
+import {boardDefault} from './Words';
 
 function Board() {
     const [board, setBoard] = useState(boardDefault);
