@@ -10,4 +10,4 @@ const boardDefault = [
 
 ];
 
-export default boardDefault
+export { boardDefault } 
