@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const boardDefault = [
+const boardDefault = [
     ['', '', '', '', ''],
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -9,3 +9,5 @@ export const boardDefault = [
     ['', '', '', '', ''],
 
 ];
+
+export default boardDefault
