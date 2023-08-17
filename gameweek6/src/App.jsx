@@ -17,8 +17,11 @@ function App() {
       </nav>
       {/* Wrap Board and Keyboard in AppContext hook*/}
       <AppContext.Provider value={{board, setBoard}}>
+      {/*Wrap board and keyboard in div and apply css class rules to center it */}
+      <div className='game'>
         <Board />
         <Keyboard />
+      </div>
       </AppContext.Provider>
     </div>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import Key from './Key';
 
 function Keyboard() {
     //set up each keyboard row as an array
@@ -7,21 +8,24 @@ function Keyboard() {
     const keys3 = ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
   return (
     <div className='keyboard'>
-    {/* make each keyboard row a div so it will be displayed like a keyboard*/}
+    {/*map through keys and make each row a div so it will be displayed like a keyboard*/}
+    {/* return Key component and pass keyVal prop with each iteration */}
         <div className='line1'>
             {keys1.map((key)=>{
-                return <div>{key}</div>
+                return <Key keyVal={key}/>
             })}
         </div>
         <div className='line2'>
             {keys2.map((key) => {
-                return <div>{key}</div>
+                return  <Key keyVal={key}/>
             })}
         </div>
         <div className='line3'>
+            <Key keyVal={'ENTER'} bigKey/>
             {keys3.map((key) => {
-                return <div>{key}</div>
+                return  <Key keyVal={key}/>
             })}
+            <Key keyVal={'DELETE'} bigKey/>
         </div>
     </div>
   )
