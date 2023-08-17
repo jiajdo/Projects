@@ -15,7 +15,7 @@ function App() {
       <nav>
         <h1>Wordle</h1>
       </nav>
-      {/* Wrap Board and Keyboard in AppContext hook to supply context to them */}
+      {/* Wrap Board and Keyboard in AppContext hook*/}
       <AppContext.Provider value={{board, setBoard}}>
         <Board />
         <Keyboard />
