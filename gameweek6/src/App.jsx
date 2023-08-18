@@ -6,6 +6,8 @@ import { boardDefault, generateWordSet } from './components/Words'
 import Letter from './components/Letter'
 import GameOver from './components/GameOver'
 
+//BUG: Squares don't turn yellow when letter is in the word but not at the right position
+
 // using createContext hook to share state with Board and Keyboard
 export const AppContext = createContext()
 
@@ -20,8 +22,8 @@ function App() {
   const [disabledLetter, setDisabledLetter] = useState([])
   const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false})
 
-  const correctWord = 'RIGHT'
-
+  const correctWord = 'right'
+  
   //from generateWordSet func, return a promise that iterates and sets useState to a word generated from wordSet
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -61,10 +63,12 @@ function App() {
     let currentWord = ''
     for (let i=0; i<5; i++){
       currentWord += board[currentAttempt.attempt][i].toLowerCase()
+      console.log(currentWord)
+      console.log(correctWord)
     }
 
     //if word is in wordle-bank, go to the next row. if not, alert 'word not found' and don't allow the next turn
-    if(wordSet.has(currentWord.toLowerCase())) {
+    if(wordSet.has(currentWord)) {
       //goes to the next row, at the first letter
       setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPosition: 0 })
     } else {
@@ -78,8 +82,9 @@ function App() {
     }
 
     //if at the 5th guess and word is wrong, game over
-    if (currentAttempt.attempt === 5) {
+    if (currentAttempt.attempt === 4) {
       setGameOver({gameOver: true, guessedWord: false})
+      return
     }
    
   }
@@ -107,7 +112,7 @@ function App() {
         {/*Wrap board and keyboard in div and apply css class rules to center it */}
         <div className='game'>
           <Board />
-          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+          {gameOver.gameOver ? <GameOver/> : <Keyboard />}
         </div>
       </AppContext.Provider>
     </div>
