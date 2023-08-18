@@ -14,6 +14,8 @@ function App() {
   //keep track of letters inputted in the row
   const [currentAttempt, setCurrentAttempt] = useState({ attempt: 0, letterPosition: 0 })
 
+  const correctWord = 'RIGHT'
+
   const onSelectLetter = (keyVal) => {
     //if player enters a 5th letter in the row, exit the function
     if (currentAttempt.letterPosition > 4) return
@@ -39,26 +41,36 @@ function App() {
   }
 
   const onEnter = () => {
-      //If row is not filled in, exit the function. Can't press ENTER.
-      if (currentAttempt.letterPosition !== 5) return
-      //goes to the next row, at the first letter
-      setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPosition: 0 })
+    //If row is not filled in, exit the function. Can't press ENTER.
+    if (currentAttempt.letterPosition !== 5) return
+    //goes to the next row, at the first letter
+    setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPosition: 0 })
   }
-    return (
-      <div className='App'>
-        <nav>
-          <h1>Wordle</h1>
-        </nav>
-        {/* Wrap Board and Keyboard in AppContext hook*/}
-        <AppContext.Provider value={{ board, setBoard, currentAttempt, setCurrentAttempt, onSelectLetter, onDelete, onEnter }}>
-          {/*Wrap board and keyboard in div and apply css class rules to center it */}
-          <div className='game'>
-            <Board />
-            <Keyboard />
-          </div>
-        </AppContext.Provider>
-      </div>
-    )
+  return (
+    <div className='App'>
+      <nav>
+        <h1>Wordle</h1>
+      </nav>
+      {/* Wrap Board and Keyboard in AppContext hook*/}
+      <AppContext.Provider
+        value={{
+          board,
+          setBoard,
+          currentAttempt,
+          setCurrentAttempt,
+          onSelectLetter,
+          onDelete,
+          onEnter,
+          correctWord
+        }}>
+        {/*Wrap board and keyboard in div and apply css class rules to center it */}
+        <div className='game'>
+          <Board />
+          <Keyboard />
+        </div>
+      </AppContext.Provider>
+    </div>
+  )
 }
 
-  export default App
+export default App
