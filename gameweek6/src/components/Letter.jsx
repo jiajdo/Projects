@@ -4,7 +4,7 @@ import { boardDefault } from './Words'
 
 
 function Letter({letterPosition, attemptVal}) {
-    const { board, correctWord, currentAttempt, disabledLetter, setDisabledLetter } = useContext(AppContext)
+    const { board, correctWord, currentAttempt, setDisabledLetter } = useContext(AppContext)
 
     //current letter in current cell
     const letter = board[attemptVal][letterPosition]
@@ -22,7 +22,7 @@ function Letter({letterPosition, attemptVal}) {
 
     useEffect(() => {
         if (letter !== '' && !correct && !almost) {
-            setDisabledLetter([...disabledLetter, letter])
+            setDisabledLetter((prev) => [...prev, letter])
         }
     }, [currentAttempt.attempt])
   return (

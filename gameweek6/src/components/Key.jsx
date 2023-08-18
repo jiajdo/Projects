@@ -3,7 +3,7 @@ import { AppContext } from '../App'
 
 //Sets conditional logic for bigKeys (Delete, Enter) and letter keys. 
 //Set logic for updating the board as you play
-function Key({ keyVal, bigKey }) {
+function Key({ keyVal, bigKey, disabled }) {
     const { onSelectLetter, onDelete, onEnter  } = useContext(AppContext)
 
     //Grabs functions from App and sets conditions for pressing Enter, Delete, or keyboard letters
@@ -18,7 +18,7 @@ function Key({ keyVal, bigKey }) {
     }
     return (
         //   use keyVal prop in div and set conditional id for bigKeys to apply CSS conditionally
-        <div className="key" id={bigKey && "big"} onClick={selectLetter}>
+        <div className="key" id={bigKey ? "big": (disabled ? 'disabled' : null)} onClick={selectLetter}>
             {keyVal}
         </div>
     )
