@@ -4,24 +4,16 @@ import { AppContext } from '../App'
 //Sets conditional logic for bigKeys (Delete, Enter) and letter keys. 
 //Set logic for updating the board as you play
 function Key({ keyVal, bigKey }) {
-    //import board state and attempt state
-    const { board, setBoard, currentAttempt, setCurrentAttempt } = useContext(AppContext)
+    const { onSelectLetter, onDelete, onEnter  } = useContext(AppContext)
 
-    //selects letter by grabbing keyVal prop from Keyboard and setting it to the new state
+    //Grabs functions from App and sets conditions for pressing Enter, Delete, or keyboard letters
     const selectLetter = () => {
         if (keyVal === 'ENTER') {
-
+            onEnter()
+        } else if (keyVal === "DELETE") {
+            onDelete()
         } else {
-            //if player enters a 5th letter in the row, exit the function
-            if (currentAttempt.letterPosition > 4) return
-            //declare newBoard and set it to current state of the board
-            const newBoard = [...board]
-            //access useState currentAttempt object, get current letter input from keyVal prop, and put it on the board
-            newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal
-            //update current state of board to include current letter input
-            setBoard(newBoard)
-            //update current attempt state and move the position of the letter to the next square in the row
-            setCurrentAttempt({ ...currentAttempt, letterPosition: currentAttempt.letterPosition + 1 })
+            onSelectLetter(keyVal)
         }
     }
     return (
