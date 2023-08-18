@@ -4,6 +4,7 @@ import Keyboard from './components/Keyboard'
 import Board from './components/Board'
 import { boardDefault, generateWordSet } from './components/Words'
 import Letter from './components/Letter'
+import GameOver from './components/GameOver'
 
 // using createContext hook to share state with Board and Keyboard
 export const AppContext = createContext()
@@ -17,6 +18,7 @@ function App() {
   const [wordSet, setWordSet] = useState(new Set())
   //keep track of incorrect letters on page's keyboard
   const [disabledLetter, setDisabledLetter] = useState([])
+  const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false})
 
   const correctWord = 'RIGHT'
 
@@ -69,8 +71,15 @@ function App() {
       alert('Word not found!')
     }
     
+    //if player guesed correctly, game over
     if (currentWord === correctWord){
-      alert('You won!')
+      setGameOver({gameOver: true, guessedWord: true})
+      return
+    }
+
+    //if at the 5th guess and word is wrong, game over
+    if (currentAttempt.attempt === 5) {
+      setGameOver({gameOver: true, guessedWord: false})
     }
    
   }
@@ -91,12 +100,14 @@ function App() {
           onEnter,
           correctWord,
           disabledLetter,
-          setDisabledLetter
+          setDisabledLetter,
+          gameOver,
+          setGameOver
         }}>
         {/*Wrap board and keyboard in div and apply css class rules to center it */}
         <div className='game'>
           <Board />
-          <Keyboard />
+          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
       </AppContext.Provider>
     </div>
