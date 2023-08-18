@@ -15,6 +15,8 @@ function App() {
   const [currentAttempt, setCurrentAttempt] = useState({ attempt: 0, letterPosition: 0 })
   //keep track of what word is being generated from wordle-bank
   const [wordSet, setWordSet] = useState(new Set())
+  //keep track of incorrect letters on page's keyboard
+  const [disabledLetter, setDisabledLetter] = useState([])
 
   const correctWord = 'RIGHT'
 
@@ -52,8 +54,25 @@ function App() {
   const onEnter = () => {
     //If row is not filled in, exit the function. Can't press ENTER.
     if (currentAttempt.letterPosition !== 5) return
-    //goes to the next row, at the first letter
-    setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPosition: 0 })
+
+    //loop through currentWord and add letters as they are inputted
+    let currentWord = ''
+    for (let i=0; i<5; i++){
+      currentWord += board[currentAttempt.attempt][i].toLowerCase()
+    }
+
+    //if word is in wordle-bank, go to the next row. if not, alert 'word not found' and don't allow the next turn
+    if(wordSet.has(currentWord.toLowerCase())) {
+      //goes to the next row, at the first letter
+      setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPosition: 0 })
+    } else {
+      alert('Word not found!')
+    }
+    
+    if (currentWord === correctWord){
+      alert('You won!')
+    }
+   
   }
   return (
     <div className='App'>
@@ -70,7 +89,9 @@ function App() {
           onSelectLetter,
           onDelete,
           onEnter,
-          correctWord
+          correctWord,
+          disabledLetter,
+          setDisabledLetter
         }}>
         {/*Wrap board and keyboard in div and apply css class rules to center it */}
         <div className='game'>
