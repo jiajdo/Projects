@@ -1,8 +1,8 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import './App.css'
 import Keyboard from './components/Keyboard'
 import Board from './components/Board'
-import { boardDefault } from './components/Words'
+import { boardDefault, generateWordSet } from './components/Words'
 import Letter from './components/Letter'
 
 // using createContext hook to share state with Board and Keyboard
@@ -13,8 +13,17 @@ function App() {
   const [board, setBoard] = useState(boardDefault)
   //keep track of letters inputted in the row
   const [currentAttempt, setCurrentAttempt] = useState({ attempt: 0, letterPosition: 0 })
+  //keep track of what word is being generated from wordle-bank
+  const [wordSet, setWordSet] = useState(new Set())
 
   const correctWord = 'RIGHT'
+
+  //from generateWordSet func, return a promise that iterates and sets useState to a word generated from wordSet
+  useEffect(() => {
+    generateWordSet().then((words) => {
+      setWordSet(words.wordSet)
+    })
+  }, [])
 
   const onSelectLetter = (keyVal) => {
     //if player enters a 5th letter in the row, exit the function
