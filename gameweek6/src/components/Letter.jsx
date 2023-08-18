@@ -10,7 +10,7 @@ function Letter({letterPosition, attemptVal}) {
     const letter = board[attemptVal][letterPosition]
 
     // returns a boolean if current letter in correctWord is equal to the letter in the cell
-    const correct = correctWord[letterPosition] === letter
+    const correct = correctWord.toUpperCase()[letterPosition] === letter
 
     //if word is correct and letter is empty and if it includes a letter from the correct word, return true
     const almost = !correct && letter != '' && correctWord.includes(letter)
